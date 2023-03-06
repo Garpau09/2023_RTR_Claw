@@ -134,51 +134,6 @@ public final class Constants {
         }
     }
 
-    public static final class AutoConstants { 
-        public static final double kMaxSpeedMetersPerSecond = 3;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
-        public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
-        public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
-    
-        public static final double kPXController = 1;
-        public static final double kPYController = 1;
-        public static final double kPThetaController = 1;
-    
-        /* Constraint for the motion profilied robot angle controller */
-        public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
-            new TrapezoidProfile.Constraints(
-                kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
-    }
-
-    public static final class VisionConstants {
-        public static final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(0);
-        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(18);
-        public static final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
-      }
-
-    public static final class StartingConstants {
-        public static final Pose2d aprilTag1 = new Pose2d(13.313558, 1.071626, new Rotation2d(Math.toRadians(180)));
-        public static final Pose2d aprilTag2 = new Pose2d(13.313558, 2.748026, new Rotation2d(Math.toRadians(180)));
-        public static final Pose2d aprilTag3 = new Pose2d(13.313558, 4.424426, new Rotation2d(Math.toRadians(180)));
-        public static final Pose2d aprilTag6 = new Pose2d(2.2, 4.424426, new Rotation2d(Math.toRadians(180)));
-        public static final Pose2d aprilTag7 = new Pose2d(2.2, 2.748026, new Rotation2d(Math.toRadians(180)));
-        public static final Pose2d aprilTag8 = new Pose2d(2.2, 1.071626, new Rotation2d(Math.toRadians(180)));
-
-        public static final Pose2d[] startingPositions = new Pose2d[]{
-            aprilTag1,
-            aprilTag2,
-            aprilTag3,
-            null,
-            null,
-            aprilTag6,
-            aprilTag7,
-            aprilTag8
-        };
-        
-    }
-    
-
-
     public static final class ClawConstants{
         public static enum ClawPoses{
             LOADING,
