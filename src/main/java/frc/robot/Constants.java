@@ -4,19 +4,19 @@ import java.util.HashMap;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSFalconSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.1;
+    
 
-    public static final class Swerve {
+    public static final class SwerveConstants {
+        public static final double stickDeadband = 0.1;
+
         public static final int pigeonID = 27;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
 

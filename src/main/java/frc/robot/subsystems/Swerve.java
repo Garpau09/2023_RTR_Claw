@@ -29,15 +29,15 @@ public class Swerve extends SubsystemBase {
     public Pigeon2 gyro;
 
     public Swerve() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID);
+        gyro = new Pigeon2(Constants.SwerveConstants.pigeonID);
         gyro.configFactoryDefault();
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
-                new SwerveModule(0, Constants.Swerve.FrontLeft.constants),
-                new SwerveModule(1, Constants.Swerve.FrontRight.constants),
-                new SwerveModule(2, Constants.Swerve.RearLeft.constants),
-                new SwerveModule(3, Constants.Swerve.RearRight.constants)
+                new SwerveModule(0, Constants.SwerveConstants.FrontLeft.constants),
+                new SwerveModule(1, Constants.SwerveConstants.FrontRight.constants),
+                new SwerveModule(2, Constants.SwerveConstants.RearLeft.constants),
+                new SwerveModule(3, Constants.SwerveConstants.RearRight.constants)
         };
 
         /*
@@ -49,11 +49,11 @@ public class Swerve extends SubsystemBase {
         resetModulesToAbsolute();
 
         //int startingAprilTag = (int) SmartDashboard.getNumber("Starting April Tag ID", 1);
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
+        swerveOdometry = new SwerveDriveOdometry(Constants.SwerveConstants.swerveKinematics, getYaw(), getModulePositions());
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
-        SwerveModuleState[] swerveModuleStates = Constants.Swerve.swerveKinematics.toSwerveModuleStates(
+        SwerveModuleState[] swerveModuleStates = Constants.SwerveConstants.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                         translation.getX(),
                         translation.getY(),
@@ -63,7 +63,7 @@ public class Swerve extends SubsystemBase {
                                 translation.getX(),
                                 translation.getY(),
                                 rotation));
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.SwerveConstants.maxSpeed);
 
         for (SwerveModule mod : mSwerveMods) {
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -72,7 +72,7 @@ public class Swerve extends SubsystemBase {
 
     /* Used by SwerveControllerCommand in Auto */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.SwerveConstants.maxSpeed);
 
         for (SwerveModule mod : mSwerveMods) {
             mod.setDesiredState(desiredStates[mod.moduleNumber], false);
@@ -108,7 +108,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw())
+        return (Constants.SwerveConstants.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw())
                 : Rotation2d.fromDegrees(gyro.getYaw());
     }
 
@@ -148,7 +148,7 @@ public Command followTrajectoryCommand(PathPlannerTrajectory traj, boolean isFir
         new PPSwerveControllerCommand(
             traj, 
             this::getPose, // Pose supplier
-            Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
+            Constants.SwerveConstants.swerveKinematics, // SwerveDriveKinematics
             new PIDController(20, 0, 0), // X controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
             new PIDController(20, 0, 0), // Y controller (usually the same values as X controller)
             new PIDController(40, 0, 0), // Rotation controller. Tune these values for your robot. Leaving them 0 will only use feedforwards.
